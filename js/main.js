@@ -2,6 +2,7 @@
 createBigSquares();
 createSmallSquares();
 
+
 function createBigSquares(){
     const gameBoard = document.getElementById("board");
     for (let index=0; index<9; index ++){
@@ -26,6 +27,18 @@ function createSmallSquares(){
     }
 }
 
+const smallSquarus = document.getElementsByClassName("small_square");
+//console.log(smallSquarus);
+
+//smallSquarus.onclick=()=>{
+    //smallSquarus.style.backgroundColor='red';
+    //smallSquarus.classList.add('highlight');
+//}
+
+
+smallSquarus.addEventListener("click",function(){
+    smallSquarus.classList.add('highlight');
+})
 
 function handleButton(number){
     console.log(number);
@@ -122,7 +135,7 @@ function handleWrongSudoku(){
         lengthList.pop();
     }
     let wrongList = allLists.pop();
-    list = allLists.pop();
+    list = allLists[allLists.length-1];
     indexLine = indexList[indexList.length-1][0];
     indexColumn = indexList[indexList.length-1][1];
     let wrongNumber = wrongList[indexLine][indexColumn];
@@ -132,11 +145,26 @@ function handleWrongSudoku(){
         }
     }
     updateList(indexLine,indexColumn);
-    let sq = document.getElementById(String(indexLine+1)+","+String(indexColumn+1));
-    sq.textContent = String(list[indexLine][indexColumn]);
+    if (isSudokuValid(list)==false){
+        list = Array.from({length:9},()=>Array.from({length:9},()=>[1,2,3,4,5,6,7,8,9]));
+        allLists = [];
+        indexList = [];
+        lengthList = [];
+    }
     allLists.push(JSON.parse(JSON.stringify(list)));
     indexLine = handleNewIndex(list)[0];
     indexColumn = handleNewIndex(list)[1];
+}
+
+function showSudoku(){
+    for (let i=0;i<9;i++){
+        for (let j=0;j<9;j++){
+            let sq = document.getElementById(String(i+1)+","+String(j+1));
+            if (Math.random()<1){
+                sq.textContent=String(list[i][j]);
+            }
+        }
+    }
 }
 
 function generateSudoku(){
@@ -147,8 +175,6 @@ function generateSudoku(){
         indexList.push([indexLine,indexColumn]);
         lengthList.push(list[indexLine][indexColumn].length);
         list[indexLine][indexColumn] = list[indexLine][indexColumn][Math.floor(Math.random()*list[indexLine][indexColumn].length)];
-        let sq = document.getElementById(String(indexLine+1)+","+String(indexColumn+1));
-        sq.textContent = String(list[indexLine][indexColumn]);
         updateList(indexLine,indexColumn);
         allLists.push(JSON.parse(JSON.stringify(list)));
         key = isSudokuValid(list);
@@ -162,6 +188,9 @@ function generateSudoku(){
         }
         stopLoop = exitLoop();
     }
+    console.log(indexList.length);
 }
+
 generateKeypad();
 generateSudoku();
+showSudoku();

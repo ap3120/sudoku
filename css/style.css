@@ -65,8 +65,12 @@
     justify-content:center;
     align-items:center;
     z-index:0;
-    font-size:35px;
+    font-size:40px;
 }
+.highlight{
+    background-color:#2F4F4F;
+}
+
 #keyboard{
     display:grid;
     grid-template-columns:repeat(3,3fr);
