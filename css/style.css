@@ -70,7 +70,12 @@
 .highlight{
     background-color:#2F4F4F;
 }
-
+.highlight2{
+    background-color:#708090;
+}
+.filling_square{
+    color:#3CB371;
+}    
 #keyboard{
     display:grid;
     grid-template-columns:repeat(3,3fr);

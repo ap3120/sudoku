@@ -2,24 +2,24 @@
 createBigSquares();
 createSmallSquares();
 
-
 function createBigSquares(){
     const gameBoard = document.getElementById("board");
     for (let index=0; index<9; index ++){
         let bigSquare = document.createElement("div");
         bigSquare.classList.add("big_square");
-        bigSquare.setAttribute("id", index+1);
+        bigSquare.setAttribute("id", index);
         gameBoard.appendChild(bigSquare);
     }
 }
+
 function createSmallSquares(){
     for (let index=0; index<9; index ++){
-        const bigSquare = document.getElementById(index + 1);
+        const bigSquare = document.getElementById(index);
         for (let i=0;i<9; i ++){
             let smallSquare = document.createElement("div");
             smallSquare.classList.add("small_square");
-            const line = 3*Math.floor(index/3)+Math.floor(i/3)+1;
-            const col = (index%3)*3+i%3+1;
+            const line = 3*Math.floor(index/3)+Math.floor(i/3);
+            const col = (index%3)*3+i%3;
             const smallSquareId = String(line)+","+String(col);
             smallSquare.setAttribute("id",smallSquareId);
             bigSquare.appendChild(smallSquare);
@@ -27,21 +27,52 @@ function createSmallSquares(){
     }
 }
 
-const smallSquarus = document.getElementsByClassName("small_square");
-//console.log(smallSquarus);
+let selectedSmallSquareId = null;
 
-//smallSquarus.onclick=()=>{
-    //smallSquarus.style.backgroundColor='red';
-    //smallSquarus.classList.add('highlight');
-//}
+for (let i=0;i<9;i++){
+    for (let j=0;j<9;j++){
+        const smallSquare = document.getElementById(String(i)+","+String(j));
+        smallSquare.addEventListener("click",function(){
+            selectedSmallSquareId = smallSquare.getAttribute('id');
+            for (let k=0;k<9;k++){
+                for (let l=0;l<9;l++){
+                    const element = document.getElementById(String(k)+","+String(l));
+                    if (i==k && j==l){
+                        element.classList.remove('highlight2');
+                        element.classList.add('highlight');
+                    }
+                    else if (3*Math.floor(i/3)+Math.floor(j/3)==3*Math.floor(k/3)+Math.floor(l/3)){
+                        element.classList.remove('highlight');
+                        element.classList.add('highlight2');
+                    }
+                    else if (i==k || j==l){
+                        element.classList.remove('highlight');
+                        element.classList.add('highlight2');
+                    }
+                    else {
+                        element.classList.remove('highlight');
+                        element.classList.remove('highlight2');
+                    }
+                }
+            }
+        })
+    }
+}
 
-
-smallSquarus.addEventListener("click",function(){
-    smallSquarus.classList.add('highlight');
-})
-
+//Create the keypad and display numbers in empty squares
 function handleButton(number){
-    console.log(number);
+    element = document.getElementById(selectedSmallSquareId);
+    for (let i=0;i<modifiableListIndex.length;i++){
+        if (element.getAttribute('id') == modifiableListIndex[i]){
+            element.classList.add('filling_square');
+            element.textContent = number;
+            let str = selectedSmallSquareId.split(",");
+            let k = parseInt(str[0]);
+            let l = parseInt(str[1]);
+            sudoList[k][l] = parseInt(number);
+            isSudokuCompleted();
+        }
+    }
 }
 
 function generateKeypad(){
@@ -58,9 +89,11 @@ function generateKeypad(){
 }
 //Create the sudoku
 let list = Array.from({length:9},()=>Array.from({length:9},()=>[1,2,3,4,5,6,7,8,9]));
+let sudoList = Array.from({length:9},()=>[0,0,0,0,0,0,0,0,0]);
 let allLists = [];
 let indexList = [];
 let lengthList = [];
+let modifiableListIndex = [];
 let key = true;
 let stopLoop = true;
 
@@ -159,9 +192,13 @@ function handleWrongSudoku(){
 function showSudoku(){
     for (let i=0;i<9;i++){
         for (let j=0;j<9;j++){
-            let sq = document.getElementById(String(i+1)+","+String(j+1));
-            if (Math.random()<1){
+            let sq = document.getElementById(String(i)+","+String(j));
+            if (Math.random()<0.95){
                 sq.textContent=String(list[i][j]);
+                sudoList[i][j]=list[i][j];
+            }
+            else{
+                modifiableListIndex.push(sq.getAttribute('id'));
             }
         }
     }
@@ -188,9 +225,44 @@ function generateSudoku(){
         }
         stopLoop = exitLoop();
     }
-    console.log(indexList.length);
+}
+
+function isSudokuCompleted(){
+    let sudokuCompleted = true;
+    for (let i=0;i<9;i++){
+        for (let j=0;j<9;j++){
+            if (list[i][j] != sudoList[i][j]){
+                sudokuCompleted = false;
+            }
+        }
+    }
+    if (sudokuCompleted == true){
+        alert("Congratulation! You've completed the sudoku.");
+    }
 }
 
 generateKeypad();
 generateSudoku();
 showSudoku();
+
+document.getElementById('erase').addEventListener('click', function(){
+    document.getElementById(selectedSmallSquareId).textContent="";
+    let str = selectedSmallSquareId.split(",");
+    let i = parseInt(str[0]);
+    let j = parseInt(str[1]);
+    sudoList[i][j] = 0;
+})
+
+document.getElementById('new_game').addEventListener('click',function(){
+    selectedSmallSquareId = null;
+    list = Array.from({length:9},()=>Array.from({length:9},()=>[1,2,3,4,5,6,7,8,9]));
+    sudoList = Array.from({length:9},()=>[0,0,0,0,0,0,0,0,0]);
+    allLists = [];
+    indexList = [];
+    lengthList = [];
+    modifiableListIndex = [];
+    key = true;
+    stopLoop = true;
+    generateSudoku();
+    showSudoku();
+})
