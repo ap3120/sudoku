@@ -80,3 +80,15 @@
     display:grid;
     grid-template-columns:repeat(3,3fr);
 }
+/*#stop_count_up_timer{
+    text-align:center;
+    justify-content:center;
+}*/
+.fa-solid, fa-pause{
+    height:2.5rem;
+    width:2.5rem;
+    font-size:2rem;
+    border-radius:50%;
+    background-color:gainsboro;
+    border:none;
+}

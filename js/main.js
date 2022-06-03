@@ -193,7 +193,7 @@ function showSudoku(){
     for (let i=0;i<9;i++){
         for (let j=0;j<9;j++){
             let sq = document.getElementById(String(i)+","+String(j));
-            if (Math.random()<0.95){
+            if (Math.random()<0.45){
                 sq.textContent=String(list[i][j]);
                 sudoList[i][j]=list[i][j];
             }
@@ -253,7 +253,47 @@ document.getElementById('erase').addEventListener('click', function(){
     sudoList[i][j] = 0;
 })
 
+//Counter
+let timerVariable = setInterval(countUpTimer, 1000);
+let totalSeconds = 0;
+
+function countUpTimer() {
+    ++totalSeconds;
+    let hour = Math.floor(totalSeconds / 3600);
+    let minute = Math.floor((totalSeconds - hour * 3600) / 60);
+    let seconds = totalSeconds - (hour * 3600 + minute * 60);
+    if(hour < 10){
+        hour = "0"+hour;
+    }
+    if(minute < 10){
+        minute = "0"+minute;
+    }
+    if(seconds < 10){
+        seconds = "0"+seconds;
+    }
+    document.getElementById("count_up_timer").innerHTML = hour + ":" + minute + ":" + seconds;
+}
+
+function stopCounter(){
+    if (timerVariable == undefined){
+        timerVariable = setInterval(countUpTimer,1000);
+    }
+    else if (timerVariable != undefined){
+        clearInterval(timerVariable);
+        timerVariable = undefined;
+    }
+}
+
+document.getElementById("stop_count_up_timer").onclick = function(){stopCounter()};
+
+//Reset the sudoku
 document.getElementById('new_game').addEventListener('click',function(){
+    const squaresToClean = document.getElementsByClassName('small_square');
+    for (let i=0;i<squaresToClean.length;i++){
+        squaresToClean[i].classList.remove('filling_square');
+        squaresToClean[i].textContent = "";
+    }
+    totalSeconds = 0;
     selectedSmallSquareId = null;
     list = Array.from({length:9},()=>Array.from({length:9},()=>[1,2,3,4,5,6,7,8,9]));
     sudoList = Array.from({length:9},()=>[0,0,0,0,0,0,0,0,0]);
