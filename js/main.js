@@ -79,7 +79,7 @@ function generateKeypad(){
     let buttonHTML='123456789'.split('').map(letter=>
     `
     <button
-    class="btn btn-primary m-2"
+    class="keyboard_button"
     id='`+letter+`'
     onclick="handleButton('`+letter+`')">
     `+letter+`
