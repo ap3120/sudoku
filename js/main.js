@@ -246,11 +246,16 @@ generateSudoku();
 showSudoku();
 
 document.getElementById('erase').addEventListener('click', function(){
-    document.getElementById(selectedSmallSquareId).textContent="";
     let str = selectedSmallSquareId.split(",");
     let i = parseInt(str[0]);
     let j = parseInt(str[1]);
-    sudoList[i][j] = 0;
+    let element = document.getElementById(selectedSmallSquareId);
+    for (let i=0;i<modifiableListIndex.length;i++){
+        if (element.getAttribute('id') == modifiableListIndex[i]){
+            element.textContent="";
+            sudoList[i][j] = 0;
+        }
+    }
 })
 
 //Counter
