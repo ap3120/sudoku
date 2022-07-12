@@ -27,7 +27,7 @@ function createSmallSquares(){
     }
 }
 
-let selectedSmallSquareId = null;
+let selectedSmallSquareId = String(4)+','+String(4);
 
 for (let i=0;i<9;i++){
     for (let j=0;j<9;j++){
@@ -59,6 +59,216 @@ for (let i=0;i<9;i++){
     }
 }
 
+window.addEventListener("keydown", function(){
+    let str = selectedSmallSquareId.split(",");
+    let i = parseInt(str[0]);
+    let j = parseInt(str[1]);
+    if (event.which == 37){
+        j = j - 1;
+        if (j>=0){
+            selectedSmallSquareId = String(i)+','+String(j);
+            for (let k=0;k<9;k++){
+                for (let l=0;l<9;l++){
+                    const element = document.getElementById(String(k)+","+String(l));
+                    if (i==k && j==l){
+                        element.classList.remove('highlight2');
+                        element.classList.add('highlight');
+                    }
+                    else if (3*Math.floor(i/3)+Math.floor(j/3)==3*Math.floor(k/3)+Math.floor(l/3)){
+                        element.classList.remove('highlight');
+                        element.classList.add('highlight2');
+                    }
+                    else if (i==k || j==l){
+                        element.classList.remove('highlight');
+                        element.classList.add('highlight2');
+                    }
+                    else {
+                        element.classList.remove('highlight');
+                        element.classList.remove('highlight2');
+                    }
+                }
+            }
+        }
+    }
+    else if (event.which == 38){
+        i = i - 1;
+        if (i>=0){
+            selectedSmallSquareId = String(i)+','+String(j);
+            for (let k=0;k<9;k++){
+                for (let l=0;l<9;l++){
+                    const element = document.getElementById(String(k)+","+String(l));
+                    if (i==k && j==l){
+                        element.classList.remove('highlight2');
+                        element.classList.add('highlight');
+                    }
+                    else if (3*Math.floor(i/3)+Math.floor(j/3)==3*Math.floor(k/3)+Math.floor(l/3)){
+                        element.classList.remove('highlight');
+                        element.classList.add('highlight2');
+                    }
+                    else if (i==k || j==l){
+                        element.classList.remove('highlight');
+                        element.classList.add('highlight2');
+                    }
+                    else {
+                        element.classList.remove('highlight');
+                        element.classList.remove('highlight2');
+                    }
+                }
+            }
+        }
+    }
+    else if (event.which == 39){
+        j = j + 1;
+        if (j<9){
+            selectedSmallSquareId = String(i)+','+String(j);
+            for (let k=0;k<9;k++){
+                for (let l=0;l<9;l++){
+                    const element = document.getElementById(String(k)+","+String(l));
+                    if (i==k && j==l){
+                        element.classList.remove('highlight2');
+                        element.classList.add('highlight');
+                    }
+                    else if (3*Math.floor(i/3)+Math.floor(j/3)==3*Math.floor(k/3)+Math.floor(l/3)){
+                        element.classList.remove('highlight');
+                        element.classList.add('highlight2');
+                    }
+                    else if (i==k || j==l){
+                        element.classList.remove('highlight');
+                        element.classList.add('highlight2');
+                    }
+                    else {
+                        element.classList.remove('highlight');
+                        element.classList.remove('highlight2');
+                    }
+                }
+            }
+        }
+    }
+    else if (event.which == 40){
+        i = i + 1;
+        if (i<9){
+            selectedSmallSquareId = String(i)+','+String(j);
+            for (let k=0;k<9;k++){
+                for (let l=0;l<9;l++){
+                    const element = document.getElementById(String(k)+","+String(l));
+                    if (i==k && j==l){
+                        element.classList.remove('highlight2');
+                        element.classList.add('highlight');
+                    }
+                    else if (3*Math.floor(i/3)+Math.floor(j/3)==3*Math.floor(k/3)+Math.floor(l/3)){
+                        element.classList.remove('highlight');
+                        element.classList.add('highlight2');
+                    }
+                    else if (i==k || j==l){
+                        element.classList.remove('highlight');
+                        element.classList.add('highlight2');
+                    }
+                    else {
+                        element.classList.remove('highlight');
+                        element.classList.remove('highlight2');
+                    }
+                }
+            }
+        }
+    }
+})
+window.addEventListener("keydown", function() {
+    element = document.getElementById(selectedSmallSquareId);
+    let str = selectedSmallSquareId.split(",");
+    let k = parseInt(str[0]);
+    let l = parseInt(str[1]);
+    if (event.which == 49 || event.which == 97){
+        for (let i=0;i<modifiableListIndex.length;i++){
+            if (element.getAttribute('id') == modifiableListIndex[i]){
+                element.classList.add('filling_square');
+                element.textContent = String(1);
+                sudoList[k][l] = 1;
+            }
+        }   
+    }
+    if (event.which == 50 || event.which == 98){
+        for (let i=0;i<modifiableListIndex.length;i++){
+            if (element.getAttribute('id') == modifiableListIndex[i]){
+                element.classList.add('filling_square');
+                element.textContent = String(2);
+                sudoList[k][l] = 2;
+            }
+        }   
+    }
+    if (event.which == 51 || event.which == 99){
+        for (let i=0;i<modifiableListIndex.length;i++){
+            if (element.getAttribute('id') == modifiableListIndex[i]){
+                element.classList.add('filling_square');
+                element.textContent = String(3);
+                sudoList[k][l] = 3;
+            }
+        }   
+    }
+    if (event.which == 52 || event.which == 100){
+        for (let i=0;i<modifiableListIndex.length;i++){
+            if (element.getAttribute('id') == modifiableListIndex[i]){
+                element.classList.add('filling_square');
+                element.textContent = String(4);
+                sudoList[k][l] = 4;
+            }
+        }   
+    }
+    if (event.which == 53 || event.which == 101){
+        for (let i=0;i<modifiableListIndex.length;i++){
+            if (element.getAttribute('id') == modifiableListIndex[i]){
+                element.classList.add('filling_square');
+                element.textContent = String(5);
+                sudoList[k][l] = 5;
+            }
+        }   
+    }
+    if (event.which == 54 || event.which == 102){
+        for (let i=0;i<modifiableListIndex.length;i++){
+            if (element.getAttribute('id') == modifiableListIndex[i]){
+                element.classList.add('filling_square');
+                element.textContent = String(6);
+                sudoList[k][l] = 6;
+            }
+        }   
+    }
+    if (event.which == 55 || event.which == 103){
+        for (let i=0;i<modifiableListIndex.length;i++){
+            if (element.getAttribute('id') == modifiableListIndex[i]){
+                element.classList.add('filling_square');
+                element.textContent = String(7);
+                sudoList[k][l] = 7;
+            }
+        }   
+    }
+    if (event.which == 56 || event.which == 104){
+        for (let i=0;i<modifiableListIndex.length;i++){
+            if (element.getAttribute('id') == modifiableListIndex[i]){
+                element.classList.add('filling_square');
+                element.textContent = String(8);
+                sudoList[k][l] = 8;
+            }
+        }   
+    }
+    if (event.which == 57 || event.which == 105){
+        for (let i=0;i<modifiableListIndex.length;i++){
+            if (element.getAttribute('id') == modifiableListIndex[i]){
+                element.classList.add('filling_square');
+                element.textContent = String(9);
+                sudoList[k][l] = 9;
+            }
+        }   
+    }
+    if (event.which == 46){
+        for (let i=0;i<modifiableListIndex.length;i++){
+            if (element.getAttribute('id') == modifiableListIndex[i]){
+                element.classList.add('filling_square');
+                element.textContent = "";
+                sudoList[k][l] = 0;
+            }
+        }   
+    }
+    isSudokuCompleted();
+})
 //Create the keypad and display numbers in empty squares
 function handleButton(number){
     element = document.getElementById(selectedSmallSquareId);
@@ -227,20 +437,6 @@ function generateSudoku(){
     }
 }
 
-function isSudokuCompleted(){
-    let sudokuCompleted = true;
-    for (let i=0;i<9;i++){
-        for (let j=0;j<9;j++){
-            if (list[i][j] != sudoList[i][j]){
-                sudokuCompleted = false;
-            }
-        }
-    }
-    if (sudokuCompleted == true){
-        alert("Congratulation! You've completed the sudoku.");
-    }
-}
-
 generateKeypad();
 generateSudoku();
 showSudoku();
@@ -291,6 +487,31 @@ function stopCounter(){
 
 document.getElementById("stop_count_up_timer").onclick = function(){stopCounter()};
 
+function isSudokuCompleted(){
+    let sudokuCompleted = true;
+    for (let i=0;i<9;i++){
+        for (let j=0;j<9;j++){
+            if (sudoList[i][j] == 0){
+                sudokuCompleted = false;
+            }
+            for (let k=0;k<9;k++){
+                for (let l=0;l<9;l++){
+                    if (i==k && j!=l || i!=k && j==l || 3*Math.floor(i/3)+Math.floor(j/3)===3*Math.floor(k/3)+Math.floor(l/3) && (i!=k || j!=l)){
+                        if (sudoList[i][j] == sudoList[k][l]){
+                            sudokuCompleted = false;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (sudokuCompleted == true){
+        //clearInterval(timerVariable);
+        stopCounter();
+        alert("Congratulation! You've completed the sudoku.");
+    }
+}
+
 //Reset the sudoku
 document.getElementById('new_game').addEventListener('click',function(){
     const squaresToClean = document.getElementsByClassName('small_square');
@@ -299,7 +520,10 @@ document.getElementById('new_game').addEventListener('click',function(){
         squaresToClean[i].textContent = "";
     }
     totalSeconds = 0;
-    selectedSmallSquareId = null;
+    if (timerVariable == undefined){
+        stopCounter();
+    }
+    selectedSmallSquareId = String(4)+','+String(4);
     list = Array.from({length:9},()=>Array.from({length:9},()=>[1,2,3,4,5,6,7,8,9]));
     sudoList = Array.from({length:9},()=>[0,0,0,0,0,0,0,0,0]);
     allLists = [];
