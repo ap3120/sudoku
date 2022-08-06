@@ -1,14 +1,13 @@
-body{
+*{
+    box-sizing: border-box;
     background-color:black;
-    margin:0;
-    padding:0;
 }
 .container{
-    min-width:100%;
     display:flex;
     flex-wrap:wrap;
     justify-content:center;
     align-items:center;
+    margin: 0 auto;
 }
 .right_container{
     display:flex;
@@ -16,8 +15,6 @@ body{
     align-items:center;
     justify-content:center;
 }
-
-
 .container h1{
     background: #59C173;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #5D26C1, #a17fe0, #59C173);  /* Chrome 10-25, Safari 5.1-6 */
@@ -28,39 +25,31 @@ body{
     -webkit-text-fill-color:transparent;
     -moz-text-fill-color:transparent;
 }
-.time_count{
-    display:flex;
-    align-items:center;
-    color:#fff;
-    margin-bottom:60px;
-}
 #board{
-    display:grid;
+    display: grid;
     grid-template-columns:repeat(3,3fr);
     cursor:pointer;
-    border: solid rgb(58,58,60);
+    border: 0.15em solid rgb(58,58,60);
     margin-bottom:20px;
     margin-right:20px;
 }
 .big_square{
-    border: solid rgb(58,58,60);
-    width:150px;
-    height:150px;
+    border: 0.15em solid rgb(58,58,60);
+    width: auto;
+    height: auto;
     color:gainsboro;
     display:grid;
     grid-template-columns:repeat(3,3fr);
-    z-index:1;
 }
 .small_square{
-    border:1px solid rgb(58,58,60);
-    width:50px;
-    height:50px;
+    border: 0.04em solid rgb(58,58,60);
+    width:1.5em;
+    height:1.5em;
     color:gainsboro;
     display:flex;
     justify-content:center;
     align-items:center;
-    z-index:0;
-    font-size:40px;
+    font-size:2em;
 }
 .highlight{
     background-color:#2F4F4F;
@@ -71,12 +60,48 @@ body{
 .filling_square{
     color:#3CB371;
 }    
+.time_count{
+    display:flex;
+    align-items:center;
+    color:#fff;
+    margin-bottom:5em;
+    border: none;
+}
+#stop_count_up_timer{
+    background-color:#2f4f4f;
+    margin-left:10px;
+    border: none;
+    border-radius: 50%;
+    height: 1.6em;
+    width: 1.6em;
+}
+#stop_count_up_timer:hover{
+    transform: scale(1.075);
+}
+.fa-solid, fa-pause{
+    background-color: #2f4f4f;
+    color: #fff;
+}
+.new_game_button{
+    border-radius:4px;
+    border: none;
+    color:#FFFFFF;
+    background: #59C173;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #5D26C1, #a17fe0, #59C173);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #5D26C1, #a17fe0, #59C173); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    padding: 10px;
+    font-size:20px;
+}
+.new_game_button:hover{
+    transform:scale(1.075);
+}
 #keyboard{
     display:grid;
     grid-template-columns:repeat(3,3fr);
     grid-gap:7px;
     padding:5px;
     margin-top:20px;
+    border: none;
 }
 .keyboard_button{
     display:flex;
@@ -85,44 +110,12 @@ body{
     background-color:#2F4F4F;
     color:#FFFFFF;
     border:none;
-    font-size:40px;
-    height:50px;
-    width:50px;
-    border-radius:4px;
+    font-size:2em;
+    height:1.5em;
+    width:1.5em;
+    border-radius:0.25em;
 }
 .keyboard_button:hover{
-    transform:scale(1.075);
-}
-#stop_count_up_timer{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    background-color:black;
-    color:#fff;
-    border:none;
-    margin-left:10px;
-}
-.fa-solid, fa-pause{
-    height:1.5rem;
-    width:1.5rem;
-    font-size:1rem;
-    border-radius:50%;
-    background-color:#2F4F4F;
-    border:none;
-}
-.new_game_button{
-    border-radius:4px;
-    border:none;
-    color:#FFFFFF;
-    background: #59C173;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #5D26C1, #a17fe0, #59C173);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #5D26C1, #a17fe0, #59C173); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    padding: 10px;
-    margin-left:20px;
-    font-size:20px;
-}
-.new_game_button:hover{
     transform:scale(1.075);
 }
 .erase_button{
@@ -135,8 +128,36 @@ body{
 .erase_button:hover{
     transform:scale(1.075);
 }
-@media screen and (max-width:700px){
+@media screen and (max-width:675px){
+    .container{
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items: center;
+        margin: 0 auto;
+    }
+    #board {
+        margin: 10px auto;
+    }
+    .big_square{
+        height:auto;
+        width: auto;
+    }
+    .small_square{
+        height:1.2em;
+        width:1.2em;
+    }
     .time_count{
-        margin-bottom:20px;
+        margin-bottom:1em;
+    }
+    .new_game_button{
+        float:right;
+    }
+    #keyboard{
+        margin-top: 10;
+    }
+    .keyboard_button{
+        font-size:1.5em;
     }
 }
+
