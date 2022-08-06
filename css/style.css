@@ -25,6 +25,9 @@
     -webkit-text-fill-color:transparent;
     -moz-text-fill-color:transparent;
 }
+.left_container p{
+    color: #fff;
+}
 #board{
     display: grid;
     grid-template-columns:repeat(3,3fr);
