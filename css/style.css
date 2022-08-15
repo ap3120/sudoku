@@ -16,14 +16,7 @@
     justify-content:center;
 }
 .container h1{
-    background: #59C173;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #5D26C1, #a17fe0, #59C173);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #5D26C1, #a17fe0, #59C173); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background-size:30%;
-    -webkit-background-clip:text;
-    -moz-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    -moz-text-fill-color:transparent;
+    color: #fff;
 }
 .left_container p{
     color: #fff;
@@ -86,12 +79,10 @@
     color: #fff;
 }
 .new_game_button{
-    border-radius:4px;
+    border-radius:10px;
     border: none;
     color:#FFFFFF;
-    background: #59C173;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #5D26C1, #a17fe0, #59C173);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #5D26C1, #a17fe0, #59C173); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-color: gainsboro;
     padding: 10px;
     font-size:20px;
 }

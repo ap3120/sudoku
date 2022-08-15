@@ -493,10 +493,11 @@ function isSudokuCompleted(){
         for (let j=0;j<9;j++){
             if (sudoList[i][j] == 0){
                 sudokuCompleted = false;
-            }
+            }//square value is set to 0 when erase key is pressed
             for (let k=0;k<9;k++){
                 for (let l=0;l<9;l++){
-                    if (i==k && j!=l || i!=k && j==l || 3*Math.floor(i/3)+Math.floor(j/3)===3*Math.floor(k/3)+Math.floor(l/3) && (i!=k || j!=l)){
+                    if (i==k && j==l) continue;
+                    else if (i==k || j==l || 3*Math.floor(i/3)+Math.floor(j/3)===3*Math.floor(k/3)+Math.floor(l/3)){
                         if (sudoList[i][j] == sudoList[k][l]){
                             sudokuCompleted = false;
                         }
@@ -506,7 +507,6 @@ function isSudokuCompleted(){
         }
     }
     if (sudokuCompleted == true){
-        //clearInterval(timerVariable);
         stopCounter();
         alert("Congratulation! You've completed the sudoku.");
     }
