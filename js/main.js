@@ -29,32 +29,36 @@ function createSmallSquares(){
 
 let selectedSmallSquareId = String(4)+','+String(4);
 
+const highlight = (i,j) => {
+    for (let k=0;k<9;k++){
+        for (let l=0;l<9;l++){
+            const element = document.getElementById(String(k)+","+String(l));
+            if (i==k && j==l){
+                element.classList.remove('highlight2');
+                element.classList.add('highlight');
+            }
+            else if (3*Math.floor(i/3)+Math.floor(j/3)==3*Math.floor(k/3)+Math.floor(l/3)){
+                element.classList.remove('highlight');
+                element.classList.add('highlight2');
+            }
+            else if (i==k || j==l){
+                element.classList.remove('highlight');
+                element.classList.add('highlight2');
+            }
+            else {
+                element.classList.remove('highlight');
+                element.classList.remove('highlight2');
+            }
+        }
+    }
+}
+
 for (let i=0;i<9;i++){
     for (let j=0;j<9;j++){
         const smallSquare = document.getElementById(String(i)+","+String(j));
         smallSquare.addEventListener("click",function(){
             selectedSmallSquareId = smallSquare.getAttribute('id');
-            for (let k=0;k<9;k++){
-                for (let l=0;l<9;l++){
-                    const element = document.getElementById(String(k)+","+String(l));
-                    if (i==k && j==l){
-                        element.classList.remove('highlight2');
-                        element.classList.add('highlight');
-                    }
-                    else if (3*Math.floor(i/3)+Math.floor(j/3)==3*Math.floor(k/3)+Math.floor(l/3)){
-                        element.classList.remove('highlight');
-                        element.classList.add('highlight2');
-                    }
-                    else if (i==k || j==l){
-                        element.classList.remove('highlight');
-                        element.classList.add('highlight2');
-                    }
-                    else {
-                        element.classList.remove('highlight');
-                        element.classList.remove('highlight2');
-                    }
-                }
-            }
+            highlight(i,j);
         })
     }
 }
@@ -67,108 +71,28 @@ window.addEventListener("keydown", function(){
         j = j - 1;
         if (j>=0){
             selectedSmallSquareId = String(i)+','+String(j);
-            for (let k=0;k<9;k++){
-                for (let l=0;l<9;l++){
-                    const element = document.getElementById(String(k)+","+String(l));
-                    if (i==k && j==l){
-                        element.classList.remove('highlight2');
-                        element.classList.add('highlight');
-                    }
-                    else if (3*Math.floor(i/3)+Math.floor(j/3)==3*Math.floor(k/3)+Math.floor(l/3)){
-                        element.classList.remove('highlight');
-                        element.classList.add('highlight2');
-                    }
-                    else if (i==k || j==l){
-                        element.classList.remove('highlight');
-                        element.classList.add('highlight2');
-                    }
-                    else {
-                        element.classList.remove('highlight');
-                        element.classList.remove('highlight2');
-                    }
-                }
-            }
+            highlight(i,j);
         }
     }
     else if (event.which == 38){
         i = i - 1;
         if (i>=0){
             selectedSmallSquareId = String(i)+','+String(j);
-            for (let k=0;k<9;k++){
-                for (let l=0;l<9;l++){
-                    const element = document.getElementById(String(k)+","+String(l));
-                    if (i==k && j==l){
-                        element.classList.remove('highlight2');
-                        element.classList.add('highlight');
-                    }
-                    else if (3*Math.floor(i/3)+Math.floor(j/3)==3*Math.floor(k/3)+Math.floor(l/3)){
-                        element.classList.remove('highlight');
-                        element.classList.add('highlight2');
-                    }
-                    else if (i==k || j==l){
-                        element.classList.remove('highlight');
-                        element.classList.add('highlight2');
-                    }
-                    else {
-                        element.classList.remove('highlight');
-                        element.classList.remove('highlight2');
-                    }
-                }
-            }
+            highlight(i,j);
         }
     }
     else if (event.which == 39){
         j = j + 1;
         if (j<9){
             selectedSmallSquareId = String(i)+','+String(j);
-            for (let k=0;k<9;k++){
-                for (let l=0;l<9;l++){
-                    const element = document.getElementById(String(k)+","+String(l));
-                    if (i==k && j==l){
-                        element.classList.remove('highlight2');
-                        element.classList.add('highlight');
-                    }
-                    else if (3*Math.floor(i/3)+Math.floor(j/3)==3*Math.floor(k/3)+Math.floor(l/3)){
-                        element.classList.remove('highlight');
-                        element.classList.add('highlight2');
-                    }
-                    else if (i==k || j==l){
-                        element.classList.remove('highlight');
-                        element.classList.add('highlight2');
-                    }
-                    else {
-                        element.classList.remove('highlight');
-                        element.classList.remove('highlight2');
-                    }
-                }
-            }
+            highlight(i,j);
         }
     }
     else if (event.which == 40){
         i = i + 1;
         if (i<9){
             selectedSmallSquareId = String(i)+','+String(j);
-            for (let k=0;k<9;k++){
-                for (let l=0;l<9;l++){
-                    const element = document.getElementById(String(k)+","+String(l));
-                    if (i==k && j==l){
-                        element.classList.remove('highlight2');
-                        element.classList.add('highlight');
-                    }
-                    else if (3*Math.floor(i/3)+Math.floor(j/3)==3*Math.floor(k/3)+Math.floor(l/3)){
-                        element.classList.remove('highlight');
-                        element.classList.add('highlight2');
-                    }
-                    else if (i==k || j==l){
-                        element.classList.remove('highlight');
-                        element.classList.add('highlight2');
-                    }
-                    else {
-                        element.classList.remove('highlight');
-                        element.classList.remove('highlight2');
-                    }
-                }
-            }
+            highlight(i,j);
         }
     }
 })
@@ -370,7 +294,7 @@ function showSudoku(){
     for (let i=0;i<9;i++){
         for (let j=0;j<9;j++){
             let sq = document.getElementById(String(i)+","+String(j));
-            if (Math.random()<0.97){
+            if (Math.random()<0.45){
                 sq.textContent=String(list[i][j]);
                 sudoList[i][j]=list[i][j];
             }
