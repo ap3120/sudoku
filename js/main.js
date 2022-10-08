@@ -178,94 +178,74 @@ window.addEventListener("keydown", function() {
     let k = parseInt(str[0]);
     let l = parseInt(str[1]);
     if (event.which == 49 || event.which == 97){
-        for (let i=0;i<modifiableListIndex.length;i++){
-            if (element.getAttribute('id') == modifiableListIndex[i]){
-                element.classList.add('filling_square');
-                element.textContent = String(1);
-                sudoList[k][l] = 1;
-            }
-        }   
+        if (modifiableListIndex.includes(element.getAttribute('id'))) {
+            element.classList.add('filling_square');
+            element.textContent = String(1);
+            sudoList[k][l] = 1;
+        }
     }
     if (event.which == 50 || event.which == 98){
-        for (let i=0;i<modifiableListIndex.length;i++){
-            if (element.getAttribute('id') == modifiableListIndex[i]){
-                element.classList.add('filling_square');
-                element.textContent = String(2);
-                sudoList[k][l] = 2;
-            }
-        }   
+        if (modifiableListIndex.includes(element.getAttribute('id'))) {
+            element.classList.add('filling_square');
+            element.textContent = String(2);
+            sudoList[k][l] = 2;
+        }
     }
     if (event.which == 51 || event.which == 99){
-        for (let i=0;i<modifiableListIndex.length;i++){
-            if (element.getAttribute('id') == modifiableListIndex[i]){
-                element.classList.add('filling_square');
-                element.textContent = String(3);
-                sudoList[k][l] = 3;
-            }
-        }   
+        if (modifiableListIndex.includes(element.getAttribute('id'))) {
+            element.classList.add('filling_square');
+            element.textContent = String(3);
+            sudoList[k][l] = 3;
+        }
     }
     if (event.which == 52 || event.which == 100){
-        for (let i=0;i<modifiableListIndex.length;i++){
-            if (element.getAttribute('id') == modifiableListIndex[i]){
-                element.classList.add('filling_square');
-                element.textContent = String(4);
-                sudoList[k][l] = 4;
-            }
-        }   
+        if (modifiableListIndex.includes(element.getAttribute('id'))) {
+            element.classList.add('filling_square');
+            element.textContent = String(4);
+            sudoList[k][l] = 4;
+        }
     }
     if (event.which == 53 || event.which == 101){
-        for (let i=0;i<modifiableListIndex.length;i++){
-            if (element.getAttribute('id') == modifiableListIndex[i]){
-                element.classList.add('filling_square');
-                element.textContent = String(5);
-                sudoList[k][l] = 5;
-            }
-        }   
+        if (modifiableListIndex.includes(element.getAttribute('id'))) {
+            element.classList.add('filling_square');
+            element.textContent = String(5);
+            sudoList[k][l] = 5;
+        }
     }
     if (event.which == 54 || event.which == 102){
-        for (let i=0;i<modifiableListIndex.length;i++){
-            if (element.getAttribute('id') == modifiableListIndex[i]){
-                element.classList.add('filling_square');
-                element.textContent = String(6);
-                sudoList[k][l] = 6;
-            }
-        }   
+        if (modifiableListIndex.includes(element.getAttribute('id'))) {
+            element.classList.add('filling_square');
+            element.textContent = String(6);
+            sudoList[k][l] = 6;
+        }
     }
     if (event.which == 55 || event.which == 103){
-        for (let i=0;i<modifiableListIndex.length;i++){
-            if (element.getAttribute('id') == modifiableListIndex[i]){
-                element.classList.add('filling_square');
-                element.textContent = String(7);
-                sudoList[k][l] = 7;
-            }
-        }   
+        if (modifiableListIndex.includes(element.getAttribute('id'))) {
+            element.classList.add('filling_square');
+            element.textContent = String(7);
+            sudoList[k][l] = 7;
+        }
     }
     if (event.which == 56 || event.which == 104){
-        for (let i=0;i<modifiableListIndex.length;i++){
-            if (element.getAttribute('id') == modifiableListIndex[i]){
-                element.classList.add('filling_square');
-                element.textContent = String(8);
-                sudoList[k][l] = 8;
-            }
-        }   
+        if (modifiableListIndex.includes(element.getAttribute('id'))) {
+            element.classList.add('filling_square');
+            element.textContent = String(8);
+            sudoList[k][l] = 8;
+        }
     }
     if (event.which == 57 || event.which == 105){
-        for (let i=0;i<modifiableListIndex.length;i++){
-            if (element.getAttribute('id') == modifiableListIndex[i]){
-                element.classList.add('filling_square');
-                element.textContent = String(9);
-                sudoList[k][l] = 9;
-            }
-        }   
+        if (modifiableListIndex.includes(element.getAttribute('id'))) {
+            element.classList.add('filling_square');
+            element.textContent = String(9);
+            sudoList[k][l] = 9;
+        }
     }
     if (event.which == 46){
-        for (let i=0;i<modifiableListIndex.length;i++){
-            if (element.getAttribute('id') == modifiableListIndex[i]){
-                element.classList.add('filling_square');
-                element.textContent = "";
-                sudoList[k][l] = 0;
-            }
-        }   
+        if (modifiableListIndex.includes(element.getAttribute('id'))) {
+            element.classList.add('filling_square');
+            element.textContent = "";
+            sudoList[k][l] = 0;
+        }
     }
     isSudokuCompleted();
 })
@@ -304,7 +284,6 @@ let allLists = [];
 let indexList = [];
 let lengthList = [];
 let modifiableListIndex = [];
-let key = true;
 let stopLoop = true;
 
 function exitLoop(){
@@ -322,24 +301,12 @@ function exitLoop(){
 function updateList(indexLine,indexColumn){
     for (let i=0;i<9;i++){
         for (let j=0;j<9;j++){
-            if (3*Math.floor(i/3)+Math.floor(j/3)===3*Math.floor(indexLine/3)+Math.floor(indexColumn/3)){
-                let k = 0;
-                let n = list[i][j].length;
-                while (list[i][j][k]!=list[indexLine][indexColumn] && k<n){
-                    k=k+1;
-                }
-                if (k<n){
-                    list[i][j].splice(k,1);
-                }
-            }    
-            else if (i===indexLine || j=== indexColumn){
-                let k = 0;
-                let n = list[i][j].length;
-                while (list[i][j][k]!=list[indexLine][indexColumn] && k<n){
-                    k=k+1;
-                }
-                if (k<n){
-                    list[i][j].splice(k,1);
+            if (list[i][j].length >= 1){ //filter method can only be applied on array
+                if (3*Math.floor(i/3)+Math.floor(j/3)===3*Math.floor(indexLine/3)+Math.floor(indexColumn/3)){
+                    list[i][j] = list[i][j].filter(elem => elem !== list[indexLine][indexColumn]);
+                }    
+                else if (i===indexLine || j=== indexColumn){
+                    list[i][j] = list[i][j].filter(elem => elem !== list[indexLine][indexColumn]);
                 }
             }
         }
@@ -361,14 +328,14 @@ function handleNewIndex(list){
 }
 
 function isSudokuValid(list){
-    for (let i=0;i<list.length;i++){
-        for (let j=0;j<list.length;j++){
-            if (list[i][j].length === 0){
-                return false;
-            }
+    let isValidBool = true;
+    
+    list.forEach(row => row.forEach(elem => {
+        if (elem.length === 0){
+            isValidBool = false;
         }
-    }
-    return true;
+    }))
+    return isValidBool;
 }
 
 function handleWrongSudoku(){
@@ -388,7 +355,7 @@ function handleWrongSudoku(){
         }
     }
     updateList(indexLine,indexColumn);
-    if (isSudokuValid(list)==false){
+    if (!isSudokuValid(list)){
         list = Array.from({length:9},()=>Array.from({length:9},()=>[1,2,3,4,5,6,7,8,9]));
         allLists = [];
         indexList = [];
@@ -403,7 +370,7 @@ function showSudoku(){
     for (let i=0;i<9;i++){
         for (let j=0;j<9;j++){
             let sq = document.getElementById(String(i)+","+String(j));
-            if (Math.random()<0.45){
+            if (Math.random()<0.97){
                 sq.textContent=String(list[i][j]);
                 sudoList[i][j]=list[i][j];
             }
@@ -417,17 +384,14 @@ function showSudoku(){
 function generateSudoku(){
     let indexLine = Math.floor(Math.random()*9);
     let indexColumn = Math.floor(Math.random()*9);
-    let filledSquareNum = 0;
     while (stopLoop == true){
         indexList.push([indexLine,indexColumn]);
         lengthList.push(list[indexLine][indexColumn].length);
         list[indexLine][indexColumn] = list[indexLine][indexColumn][Math.floor(Math.random()*list[indexLine][indexColumn].length)];
         updateList(indexLine,indexColumn);
         allLists.push(JSON.parse(JSON.stringify(list)));
-        key = isSudokuValid(list);
-        if (key === false){
+        if (! isSudokuValid(list)){
             handleWrongSudoku();
-            key = true;
         }
         else {
             indexLine = handleNewIndex(list)[0];
@@ -446,11 +410,9 @@ document.getElementById('erase').addEventListener('click', function(){
     let i = parseInt(str[0]);
     let j = parseInt(str[1]);
     let element = document.getElementById(selectedSmallSquareId);
-    for (let i=0;i<modifiableListIndex.length;i++){
-        if (element.getAttribute('id') == modifiableListIndex[i]){
-            element.textContent="";
-            sudoList[i][j] = 0;
-        }
+    if (modifiableListIndex.includes(element.getAttribute('id'))){
+        element.textContent="";
+        sudoList[i][j] = 0;
     }
 })
 
@@ -496,8 +458,7 @@ function isSudokuCompleted(){
             }//square value is set to 0 when erase key is pressed
             for (let k=0;k<9;k++){
                 for (let l=0;l<9;l++){
-                    if (i==k && j==l) continue;
-                    else if (i==k || j==l || 3*Math.floor(i/3)+Math.floor(j/3)===3*Math.floor(k/3)+Math.floor(l/3)){
+                    if (!(i==k && j==l) && (i==k || j==l || 3*Math.floor(i/3)+Math.floor(j/3)===3*Math.floor(k/3)+Math.floor(l/3))){
                         if (sudoList[i][j] == sudoList[k][l]){
                             sudokuCompleted = false;
                         }
@@ -530,7 +491,6 @@ document.getElementById('new_game').addEventListener('click',function(){
     indexList = [];
     lengthList = [];
     modifiableListIndex = [];
-    key = true;
     stopLoop = true;
     generateSudoku();
     showSudoku();
