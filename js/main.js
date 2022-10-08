@@ -101,71 +101,53 @@ window.addEventListener("keydown", function() {
     let str = selectedSmallSquareId.split(",");
     let k = parseInt(str[0]);
     let l = parseInt(str[1]);
-    if (event.which == 49 || event.which == 97){
-        if (modifiableListIndex.includes(element.getAttribute('id'))) {
+    if (modifiableListIndex.includes(element.getAttribute('id'))) {
+        if (event.which == 49 || event.which == 97){
             element.classList.add('filling_square');
             element.textContent = String(1);
             sudoList[k][l] = 1;
         }
-    }
-    if (event.which == 50 || event.which == 98){
-        if (modifiableListIndex.includes(element.getAttribute('id'))) {
+        if (event.which == 50 || event.which == 98){
             element.classList.add('filling_square');
             element.textContent = String(2);
             sudoList[k][l] = 2;
         }
-    }
-    if (event.which == 51 || event.which == 99){
-        if (modifiableListIndex.includes(element.getAttribute('id'))) {
+        if (event.which == 51 || event.which == 99){
             element.classList.add('filling_square');
             element.textContent = String(3);
             sudoList[k][l] = 3;
         }
-    }
-    if (event.which == 52 || event.which == 100){
-        if (modifiableListIndex.includes(element.getAttribute('id'))) {
+        if (event.which == 52 || event.which == 100){
             element.classList.add('filling_square');
             element.textContent = String(4);
             sudoList[k][l] = 4;
         }
-    }
-    if (event.which == 53 || event.which == 101){
-        if (modifiableListIndex.includes(element.getAttribute('id'))) {
+        if (event.which == 53 || event.which == 101){
             element.classList.add('filling_square');
             element.textContent = String(5);
             sudoList[k][l] = 5;
         }
-    }
-    if (event.which == 54 || event.which == 102){
-        if (modifiableListIndex.includes(element.getAttribute('id'))) {
+        if (event.which == 54 || event.which == 102){
             element.classList.add('filling_square');
             element.textContent = String(6);
             sudoList[k][l] = 6;
         }
-    }
-    if (event.which == 55 || event.which == 103){
-        if (modifiableListIndex.includes(element.getAttribute('id'))) {
+        if (event.which == 55 || event.which == 103){
             element.classList.add('filling_square');
             element.textContent = String(7);
             sudoList[k][l] = 7;
         }
-    }
-    if (event.which == 56 || event.which == 104){
-        if (modifiableListIndex.includes(element.getAttribute('id'))) {
+        if (event.which == 56 || event.which == 104){
             element.classList.add('filling_square');
             element.textContent = String(8);
             sudoList[k][l] = 8;
         }
-    }
-    if (event.which == 57 || event.which == 105){
-        if (modifiableListIndex.includes(element.getAttribute('id'))) {
+        if (event.which == 57 || event.which == 105){
             element.classList.add('filling_square');
             element.textContent = String(9);
             sudoList[k][l] = 9;
         }
-    }
-    if (event.which == 46){
-        if (modifiableListIndex.includes(element.getAttribute('id'))) {
+        if (event.which == 46){
             element.classList.add('filling_square');
             element.textContent = "";
             sudoList[k][l] = 0;
