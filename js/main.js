@@ -344,10 +344,15 @@ function countUpTimer() {
 }
 
 function stopCounter(){
+    const element = document.getElementsByTagName("i")[0];
     if (timerVariable == undefined){
+        element.classList.remove("fa-solid", "fa-play");
+        element.classList.add("fa-solid", "fa-pause");
         timerVariable = setInterval(countUpTimer,1000);
     }
     else if (timerVariable != undefined){
+        element.classList.remove("fa-solid", "fa-pause");
+        element.classList.add("fa-solid", "fa-play");
         clearInterval(timerVariable);
         timerVariable = undefined;
     }

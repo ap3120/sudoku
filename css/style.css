@@ -1,6 +1,6 @@
 *{
     box-sizing: border-box;
-    background-color:black;
+    background-color:"#fff"; /* change here for dark mode*/
 }
 .container{
     display:flex;
@@ -15,12 +15,7 @@
     align-items:center;
     justify-content:center;
 }
-.container h1{
-    color: #fff;
-}
-.left_container p{
-    color: #fff;
-}
+
 #board{
     display: grid;
     grid-template-columns:repeat(3,3fr);
@@ -41,7 +36,7 @@
     border: 0.04em solid rgb(58,58,60);
     width:1.5em;
     height:1.5em;
-    color:gainsboro;
+    color:#000;/*gainsboro for dark mode*/
     display:flex;
     justify-content:center;
     align-items:center;
@@ -49,9 +44,11 @@
 }
 .highlight{
     background-color:#2F4F4F;
+    color: gainsboro;
 }
 .highlight2{
-    background-color:#000024;
+    background-color:#696969;
+    color: gainsboro;
 }
 .filling_square{
     color:#3CB371;
@@ -59,7 +56,7 @@
 .time_count{
     display:flex;
     align-items:center;
-    color:#fff;
+    /*color:#fff;*/
     margin-bottom:5em;
     border: none;
 }
@@ -74,7 +71,7 @@
 #stop_count_up_timer:hover{
     transform: scale(1.075);
 }
-.fa-solid, fa-pause{
+.fa-solid, fa-pause, fa-play{
     background-color: #2f4f4f;
     color: #fff;
 }
