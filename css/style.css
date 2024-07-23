@@ -1,6 +1,6 @@
 *{
     box-sizing: border-box;
-    background-color:"#fff"; /* change here for dark mode*/
+    background-color:"#fff";
 }
 .container{
     display:flex;
@@ -36,7 +36,7 @@
     border: 0.04em solid rgb(58,58,60);
     width:1.5em;
     height:1.5em;
-    color:#000;/*gainsboro for dark mode*/
+    color:#000;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -56,8 +56,7 @@
 .time_count{
     display:flex;
     align-items:center;
-    /*color:#fff;*/
-    margin-bottom:5em;
+    margin-bottom:2em;
     border: none;
 }
 #stop_count_up_timer{
@@ -89,7 +88,7 @@
 #keyboard{
     display:grid;
     grid-template-columns:repeat(3,3fr);
-    grid-gap:7px;
+    grid-gap:5px;
     padding:5px;
     margin-top:20px;
     border: none;
@@ -101,7 +100,7 @@
     background-color:#2F4F4F;
     color:#FFFFFF;
     border:none;
-    font-size:2em;
+    font-size:3em;
     height:1.5em;
     width:1.5em;
     border-radius:0.25em;
@@ -110,10 +109,11 @@
     transform:scale(1.075);
 }
 .erase_button{
-    border-radius:4px;
+    border-radius:10px;
     border:none;
     background-color:#2F4F4F;
     color:#FFFFFF;
+    padding: 10px;
     font-size:20px;
 }
 .erase_button:hover{
@@ -128,7 +128,7 @@
         margin: 0 auto;
     }
     #board {
-        margin: 10px auto;
+        margin: 5px 0px 5px 0px;
     }
     .big_square{
         height:auto;
@@ -141,14 +141,8 @@
     .time_count{
         margin-bottom:1em;
     }
-    .new_game_button{
-        float:right;
-    }
-    #keyboard{
-        margin-top: 10;
-    }
     .keyboard_button{
-        font-size:1.5em;
+        font-size:2.5em;
     }
 }
 

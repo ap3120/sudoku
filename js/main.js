@@ -96,62 +96,29 @@ window.addEventListener("keydown", function(){
         }
     }
 })
+
+const addClassAndContentToSquare = (element, classToAdd, number, k, l) => {
+  element.classList.add(classToAdd);
+  element.textContent = number > 0 ? String(number) : "";
+  sudokuAsArray[k * 9 + l] = number;
+}
+
 window.addEventListener("keydown", function() {
     element = document.getElementById(selectedSmallSquareId);
     let str = selectedSmallSquareId.split(",");
     let k = parseInt(str[0]);
     let l = parseInt(str[1]);
     if (modifiableListIndex.includes(element.getAttribute('id'))) {
-        if (event.which == 49 || event.which == 97){
-            element.classList.add('filling_square');
-            element.textContent = String(1);
-            sudokuAsArray[k * 9 + l] = 1;
-        }
-        if (event.which == 50 || event.which == 98){
-            element.classList.add('filling_square');
-            element.textContent = String(2);
-            sudokuAsArray[k * 9 + l] = 2;
-        }
-        if (event.which == 51 || event.which == 99){
-            element.classList.add('filling_square');
-            element.textContent = String(3);
-            sudokuAsArray[k * 9 + l] = 3;
-        }
-        if (event.which == 52 || event.which == 100){
-            element.classList.add('filling_square');
-            element.textContent = String(4);
-            sudokuAsArray[k * 9 + l] = 4;
-        }
-        if (event.which == 53 || event.which == 101){
-            element.classList.add('filling_square');
-            element.textContent = String(5);
-            sudokuAsArray[k * 9 + l] = 5;
-        }
-        if (event.which == 54 || event.which == 102){
-            element.classList.add('filling_square');
-            element.textContent = String(6);
-            sudokuAsArray[k * 9 + l] = 6;
-        }
-        if (event.which == 55 || event.which == 103){
-            element.classList.add('filling_square');
-            element.textContent = String(7);
-            sudokuAsArray[k * 9 + l] = 7;
-        }
-        if (event.which == 56 || event.which == 104){
-            element.classList.add('filling_square');
-            element.textContent = String(8);
-            sudokuAsArray[k * 9 + l] = 8;
-        }
-        if (event.which == 57 || event.which == 105){
-            element.classList.add('filling_square');
-            element.textContent = String(9);
-            sudokuAsArray[k * 9 + l] = 9;
-        }
-        if (event.which == 46){
-            element.classList.add('filling_square');
-            element.textContent = "";
-            sudokuAsArray[k * 9 + l] = 0;
-        }
+        if (event.which == 49 || event.which == 97) addClassAndContentToSquare(element, 'filling_square', 1, k, l)
+        if (event.which == 50 || event.which == 98) addClassAndContentToSquare(element, 'filling_square', 2, k, l)
+        if (event.which == 51 || event.which == 99) addClassAndContentToSquare(element, 'filling_square', 3, k, l)
+        if (event.which == 52 || event.which == 100) addClassAndContentToSquare(element, 'filling_square', 4, k, l)
+        if (event.which == 53 || event.which == 101) addClassAndContentToSquare(element, 'filling_square', 5, k, l)
+        if (event.which == 54 || event.which == 102) addClassAndContentToSquare(element, 'filling_square', 6, k, l)
+        if (event.which == 55 || event.which == 103) addClassAndContentToSquare(element, 'filling_square', 7, k, l)
+        if (event.which == 56 || event.which == 104) addClassAndContentToSquare(element, 'filling_square', 8, k, l)
+        if (event.which == 57 || event.which == 105) addClassAndContentToSquare(element, 'filling_square', 9, k, l)
+        if (event.which == 46) addClassAndContentToSquare(element, 'filling_square', 0, k, l)
     }
     isSudokuCompleted();
 })
@@ -278,11 +245,17 @@ const generate = () => {
   }
 }
 
+const getDifficulty = () => {
+  if (document.getElementById("easy").checked) return 0.6;
+  if (document.getElementById("hard").checked) return 0.3;
+  return 0.4;
+}
+
 function showSudoku(){
     for (let i=0;i<sudokuAsArray.length;i++){
         const indices = getIndicesFromIndex(i);
         let sq = document.getElementById(String(indices.row)+","+String(indices.col));
-        if (Math.random()<0.45){
+        if (Math.random() < getDifficulty()){
             sq.textContent=String(sudokuAsArray[i]);
         } else{
             sudokuAsArray[i] = 0;
