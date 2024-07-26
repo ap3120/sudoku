@@ -245,20 +245,163 @@ const generate = () => {
   }
 }
 
+class SudokuNode {
+  constructor(value, possibilities) {
+    this.value = value;
+    this.possibilities = possibilities;
+  }
+
+  getValue() {
+    return this.value; 
+  }
+
+  setValue(newValue) {
+    this.value = newValue;
+  }
+
+  getPossibilities() {
+    return this.possibilities;
+  }
+
+  removePossibility(value) {
+    const index = this.possibilities.findIndex(elem => elem === value);
+    if (index > -1) this.possibilities.splice(index, 1);
+
+  }
+
+  emptyPossibilities() {
+    this.possibilities = [];
+  }
+}
+
+const handleArrayFromSudoku = (array) => {
+  let sudoku = [];
+  for (let i=0; i<array.length; i++) {
+    if (array[i] === 0) {
+      const indices = getIndicesFromIndex(i);
+      let possibilities = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      for (let k=0; k<array.length; k++) {
+        const tmpIndices = getIndicesFromIndex(k);
+        if (i != k && (indices.row === tmpIndices.row || indices.col === tmpIndices.col || 3 * Math.floor(indices.row / 3) + Math.floor(indices.col / 3) === 3 * Math.floor(tmpIndices.row / 3) + Math.floor(tmpIndices.col / 3))) {
+          possibilities = possibilities.filter(elem => elem !== array[k]);
+        }
+      }
+      sudoku.push(new SudokuNode(0, possibilities));
+    } else {
+      sudoku.push(new SudokuNode(array[i], []));
+    }
+  }
+  return sudoku;
+}
+
+const getIndexWithMinPossibilities = (sudoku) => {
+  let index = 0;
+  for (let i=1; i<sudoku.length; i++) {
+    if ((sudoku[i].getValue() === 0 && sudoku[index].getValue() !== 0) || (sudoku[i].getPossibilities().length < sudoku[index].getPossibilities().length && sudoku[i].getValue() === 0)) index = i;
+  }
+  return index;
+}
+
+const updateSudoku = (i, sudoku) => {
+  const indices = getIndicesFromIndex(i);
+  for (let j=0; j<sudoku.length; j++) {
+    const tmpIndices = getIndicesFromIndex(j);
+    if (i !== j && (indices.row === tmpIndices.row || indices.col === tmpIndices.col || 3 * Math.floor(indices.row / 3) + Math.floor(indices.col / 3) === 3 * Math.floor(tmpIndices.row / 3) + Math.floor(tmpIndices.col / 3))) {
+      if (sudoku[j].getPossibilities().length > 1) {
+        sudoku[j].removePossibility(sudoku[i].getValue());
+      }
+    }
+  }
+}
+
+const sumArray = arr => {
+  let sum = 0;
+  for (let i=0; i<arr.length; i++) {
+    sum += arr[i];
+  }
+  return sum;
+}
+
+const customClone = sudoku => {
+  let arr = [];
+  for (let i=0; i<sudoku.length; i++) {
+    arr.push(sudoku[i].getValue());
+  }
+  return handleArrayFromSudoku(arr);
+}
+
+const printSudoku = (sudoku) => {
+  for (let i=0; i<9; i++) {
+    console.log("|" + sudoku[i * 9].getValue() + "|" + sudoku[i * 9 + 1].getValue() + "|" + sudoku[i * 9 + 2].getValue() + "|" + sudoku[i * 9 + 3].getValue() + "|" + sudoku[i * 9 + 4].getValue() + "|" + sudoku[i * 9 + 5].getValue() + "|" + sudoku[i * 9 + 6].getValue() + "|" + sudoku[i * 9 + 7].getValue() + "|" + sudoku[i * 9 + 8].getValue() + "|");
+  }
+  console.log("");
+}
+
+const solveSudoku = (sudoku) => {
+  let i = 0;
+
+  while (i < sudoku.length) {
+    if (sudoku[i].getValue() === 0 && sudoku[i].getPossibilities().length === 0) return 0;
+    if (sudoku[i].getPossibilities().length === 1 && sudoku[i].getValue() === 0) {
+      const valueToAdd = sudoku[i].getPossibilities()[0];
+      sudoku[i].setValue(valueToAdd);
+      sudoku[i].emptyPossibilities();
+      updateSudoku(i, sudoku);
+      i = 0;
+    } else {
+      i += 1;
+    }
+  }
+
+  let isValid = true;
+  for (let j=0; j<sudoku.length; j++) {
+    if (sudoku[j].getValue() === 0) isValid = false;
+  }
+
+  if (isValid) {
+    //printSudoku(sudoku);
+    return 1;
+  } else {
+    const index = getIndexWithMinPossibilities(sudoku);
+    const n = sudoku[index].getPossibilities().length
+    let newSudokus = [];
+    for (let j=0; j<n; j++) {
+      let newSudoku = customClone(sudoku);
+      const valueToAdd = newSudoku[index].getPossibilities()[j];
+      newSudoku[index].setValue(valueToAdd);
+      newSudoku[index].emptyPossibilities();
+      updateSudoku(index, newSudoku);
+      newSudokus.push(newSudoku); 
+    }
+    return sumArray(newSudokus.map(elem => solveSudoku(elem)));
+  }
+
+}
+
+const getNumberOfSolutions = (arr) => {
+  const sudoku = handleArrayFromSudoku(arr);
+  return solveSudoku(sudoku);
+}
+
 const getDifficulty = () => {
-  if (document.getElementById("easy").checked) return 0.6;
-  if (document.getElementById("hard").checked) return 0.3;
-  return 0.4;
+  if (document.getElementById("easy").checked) return 50;
+  if (document.getElementById("hard").checked) return 80;
+  return 65;
 }
 
 function showSudoku(){
-    for (let i=0;i<sudokuAsArray.length;i++){
+    for (let i=0;i<getDifficulty();i++){
+        const index = Math.floor(Math.random() * sudokuAsArray.length);
+        if (sudokuAsArray[index] === 0) continue;
+        const tmpSudoku = sudokuAsArray.slice(0, index).concat(0).concat(sudokuAsArray.slice(index + 1, sudokuAsArray.length));
+        if (getNumberOfSolutions(tmpSudoku) === 1) sudokuAsArray[index] = 0;
+    }
+    for (let i=0; i<sudokuAsArray.length; i++) {
         const indices = getIndicesFromIndex(i);
         let sq = document.getElementById(String(indices.row)+","+String(indices.col));
-        if (Math.random() < getDifficulty()){
+        if (sudokuAsArray[i] > 0) {
             sq.textContent=String(sudokuAsArray[i]);
         } else{
-            sudokuAsArray[i] = 0;
             modifiableListIndex.push(sq.getAttribute('id'));
         }
     }
