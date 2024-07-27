@@ -384,26 +384,35 @@ const getNumberOfSolutions = (arr) => {
 }
 
 const getDifficulty = () => {
-  if (document.getElementById("easy").checked) return 50;
-  if (document.getElementById("hard").checked) return 80;
-  return 65;
+  if (document.getElementById("easy").checked) return 0.6;
+  if (document.getElementById("hard").checked) return 1;
+  return 0.8;
 }
 
 function showSudoku(){
-    for (let i=0;i<getDifficulty();i++){
-        const index = Math.floor(Math.random() * sudokuAsArray.length);
-        if (sudokuAsArray[index] === 0) continue;
-        const tmpSudoku = sudokuAsArray.slice(0, index).concat(0).concat(sudokuAsArray.slice(index + 1, sudokuAsArray.length));
-        if (getNumberOfSolutions(tmpSudoku) === 1) sudokuAsArray[index] = 0;
+    let shuffledIndexes = Array.from({length: sudokuAsArray.length}, (_, i) => i);
+    for (let i=0; i<shuffledIndexes.length; i++) {
+        const j = Math.floor(Math.random() * sudokuAsArray.length);
+        const tmp = shuffledIndexes[i];
+        shuffledIndexes[i] = shuffledIndexes[j];
+        shuffledIndexes[j] = tmp;
     }
-    for (let i=0; i<sudokuAsArray.length; i++) {
-        const indices = getIndicesFromIndex(i);
+    
+    for (let i=0; i<shuffledIndexes.length; i++) {
+        const index = shuffledIndexes[i];
+        const indices = getIndicesFromIndex(index);
         let sq = document.getElementById(String(indices.row)+","+String(indices.col));
-        if (sudokuAsArray[i] > 0) {
-            sq.textContent=String(sudokuAsArray[i]);
-        } else{
-            modifiableListIndex.push(sq.getAttribute('id'));
-        }
+        if (Math.random() < getDifficulty()) {
+            const tmpSudoku = sudokuAsArray.slice(0, index).concat(0).concat(sudokuAsArray.slice(index + 1, sudokuAsArray.length));
+            if (getNumberOfSolutions(tmpSudoku) === 1) {
+                sudokuAsArray[index] = 0;
+                modifiableListIndex.push(sq.getAttribute('id'));
+            } else {
+                sq.textContent = String(sudokuAsArray[index]);
+            }
+        } else {
+            sq.textContent = String(sudokuAsArray[index]);
+        }    
     }
 }
 
