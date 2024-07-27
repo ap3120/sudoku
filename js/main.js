@@ -199,7 +199,7 @@ const getIndicesFromIndex = (index) => {
 }
 
 const generate = () => {
-  let sudoku = new LinkedList(new Node(Math.floor(Math.random() * 10), null, [1, 2, 3, 4, 5, 6, 7, 8, 9], 0));
+  let sudoku = new LinkedList(new Node(Math.floor(Math.random() * 9) + 1, null, [1, 2, 3, 4, 5, 6, 7, 8, 9], 0));
   while(sudoku.getDepth() < 81) {
     let possibilities = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     const tail = sudoku.tail;
