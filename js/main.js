@@ -148,7 +148,7 @@ function generateKeypad(){
     `+letter+`
     </button>
     `).join("");
-    document.getElementById("keyboard").innerHTML = buttonHTML;
+    document.getElementById("new_game").insertAdjacentHTML('beforebegin', buttonHTML);
 }
 //Create the sudoku
 let sudokuAsArray = [];
